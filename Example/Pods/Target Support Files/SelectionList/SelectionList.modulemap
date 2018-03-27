@@ -1,0 +1,6 @@
+framework module SelectionList {
+  umbrella header "SelectionList-umbrella.h"
+
+  export *
+  module * { export * }
+}
