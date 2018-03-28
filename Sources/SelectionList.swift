@@ -65,7 +65,7 @@ import UIKit
             return tableView.indexPathForSelectedRow?.row
         }
         set {
-            selectedIndexes = [selectedIndex].flatMap { $0 }
+            selectedIndexes = [newValue].flatMap { $0 }
         }
     }
 
