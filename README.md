@@ -9,7 +9,7 @@ Simple single-selection or multiple-selection view, based on UITableView.
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 <p align="center">
-<img src="Screenshots/SelectionList.png">&nbsp;<img src="Screenshots/SelectionListStandard.png">
+<img src="Screenshots/SelectionList.png">&nbsp;&nbsp;&nbsp;&nbsp;<img src="Screenshots/SelectionListStandard.png">
 </p>
 
 ## Usage

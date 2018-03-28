@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "SelectionList"
-  s.version      = "1.0"
+  s.version      = "1.0.1"
   s.summary      = "Simple single-selection or multiple-selection view, based on UITableView."
 
   s.homepage     = "https://github.com/yonat/SelectionList"

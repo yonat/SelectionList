@@ -46,23 +46,17 @@ import UIKit
         }
         set {
             tableView.rowHeight = newValue
+            tableView.estimatedRowHeight = newValue
+            invalidateIntrinsicContentSize()
         }
     }
 
     /// the possible options to select
     open var items: [String] = [] {
         didSet {
-            if items.count != oldValue.count {
-                let prevSelectedIndexPaths = tableView.indexPathsForSelectedRows?.filter { $0.row < items.count } ?? []
-                tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
-                invalidateIntrinsicContentSize()
-                tableView.selectRows(at: prevSelectedIndexPaths)
-            }
-            else {
-                for indexPath in tableView.indexPathsForVisibleRows ?? [] {
-                    tableView.cellForRow(at: indexPath)?.textLabel?.text = items[indexPath.row]
-                }
-            }
+            deselectAll()
+            tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+            invalidateIntrinsicContentSize()
         }
     }
 
@@ -71,10 +65,7 @@ import UIKit
             return tableView.indexPathForSelectedRow?.row
         }
         set {
-            tableView.deselectRows(at: tableView.indexPathsForSelectedRows?.filter { $0.row != selectedIndex } ?? [])
-            if let selectedIndex = newValue {
-                tableView.selectRow(at: IndexPath(row: selectedIndex, section: 0), animated: true, scrollPosition: .none)
-            }
+            selectedIndexes = [selectedIndex].flatMap { $0 }
         }
     }
 
@@ -83,13 +74,14 @@ import UIKit
             return tableView.indexPathsForSelectedRows?.map { $0.row } ?? []
         }
         set {
-            tableView.deselectRows(at: tableView.indexPathsForSelectedRows?.filter { newValue.contains($0.row) } ?? [])
-            let newIndexPathsToSelect = newValue
-                .map { IndexPath(row: $0, section: 0) }
-                .filter { !(tableView.indexPathsForSelectedRows?.contains($0) ?? false) }
-            tableView.selectRows(at: newIndexPathsToSelect, animated: true)
+            deselectAll()
+            let indexPathsToSelect = newValue.map { IndexPath(row: $0, section: 0) }
+            self.tableView.selectRows(at: indexPathsToSelect, animated: true)
+            updateMarks()
         }
     }
+
+    public private(set) var lastChangedIndex: Int? = nil
 
     /// additional styling for the cell
     open var setupCell: ((UITableViewCell, Int) -> Void)? {
@@ -131,46 +123,19 @@ extension SelectionList {
         tableView.frame = bounds
         tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         addSubview(tableView)
+        invalidateIntrinsicContentSize()
+    }
+
+    func deselectAll() {
+        if let selectedIndexPaths = tableView.indexPathsForSelectedRows {
+            tableView.deselectRows(at: selectedIndexPaths)
+        }
     }
 
     func updateMarks() {
         for indexPath in tableView.indexPathsForVisibleRows ?? [] {
-            guard let cell = tableView.cellForRow(at: indexPath) else { continue }
-            mark(cell: cell, selected: tableView.indexPathsForVisibleRows?.contains(indexPath) ?? false)
-        }
-    }
-
-    func mark(cell: UITableViewCell, selected: Bool) {
-        if let selectionImage = selectionImage {
-            if isSelectionMarkTrailing {
-                if selected {
-                    cell.accessoryView = UIImageView(image: selectionImage)
-                }
-                else {
-                    if let deselectionImage = deselectionImage {
-                        cell.accessoryView = UIImageView(image: deselectionImage)
-                    }
-                    else {
-                        cell.accessoryView = nil
-                    }
-                }
-            }
-            else {
-                if selected {
-                    cell.imageView?.image = selectionImage
-                }
-                else {
-                    if let deselectionImage = deselectionImage {
-                        cell.imageView?.image = deselectionImage
-                    }
-                    else {
-                        cell.imageView?.image = UIImage.emptyImage(with: selectionImage.size)
-                    }
-                }
-            }
-        }
-        else {
-            cell.accessoryType = selected ? .checkmark : .none
+            guard let cell = tableView.cellForRow(at: indexPath) as? SelectionListCell else { continue }
+            cell.updateSelectionAppearance()
         }
     }
 }
@@ -183,26 +148,66 @@ extension SelectionList: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         cell.selectionStyle = .none
+        if let cell = cell as? SelectionListCell {
+            cell.selectionImage = selectionImage
+            cell.deselectionImage = deselectionImage
+            cell.isSelectionMarkTrailing = isSelectionMarkTrailing
+        }
         cell.textLabel?.text = items[indexPath.row]
         setupCell?(cell, indexPath.row)
-        mark(cell: cell, selected: tableView.indexPathsForSelectedRows?.contains(indexPath) ?? false)
         return cell
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) else { return }
-        mark(cell: cell, selected: true)
+        lastChangedIndex = indexPath.row
         sendActions(for: .valueChanged)
     }
 
     public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) else { return }
-        mark(cell: cell, selected: false)
+        lastChangedIndex = indexPath.row
         sendActions(for: .valueChanged)
     }
 }
 
 class SelectionListCell: UITableViewCell {
+    var selectionImage: UIImage?
+    var deselectionImage: UIImage?
+    var isSelectionMarkTrailing: Bool = true
+
+    func updateSelectionAppearance() {
+        if let selectionImage = selectionImage {
+            if isSelectionMarkTrailing {
+                if isSelected {
+                    accessoryView = UIImageView(image: selectionImage)
+                }
+                else {
+                    if let deselectionImage = deselectionImage {
+                        accessoryView = UIImageView(image: deselectionImage)
+                    }
+                    else {
+                        accessoryView = nil
+                    }
+                }
+            }
+            else {
+                if isSelected {
+                    imageView?.image = selectionImage
+                }
+                else {
+                    if let deselectionImage = deselectionImage {
+                        imageView?.image = deselectionImage
+                    }
+                    else {
+                        imageView?.image = UIImage.emptyImage(size: selectionImage.size)
+                    }
+                }
+            }
+        }
+        else {
+            accessoryType = isSelected ? .checkmark : .none
+        }
+    }
+
     private var imageViewOriginX = CGFloat(0)
 
     override func layoutSubviews() {
@@ -217,10 +222,20 @@ class SelectionListCell: UITableViewCell {
         imageViewFrame.origin.x = imageViewOriginX + CGFloat(indentationLevel) * indentationWidth
         imageView?.frame = imageViewFrame
     }
+
+    override var isSelected: Bool {
+        didSet {
+            updateSelectionAppearance()
+        }
+    }
+
+    override func prepareForReuse() {
+        updateSelectionAppearance()
+    }
 }
 
 extension UIImage {
-    static func emptyImage(with size: CGSize) -> UIImage? {
+    static func emptyImage(size: CGSize) -> UIImage? {
         UIGraphicsBeginImageContext(size)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
