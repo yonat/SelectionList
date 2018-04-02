@@ -65,7 +65,7 @@ import UIKit
             return tableView.indexPathForSelectedRow?.row
         }
         set {
-            selectedIndexes = [newValue].flatMap { $0 }
+            selectedIndexes = [newValue].compactMap { $0 }
         }
     }
 
@@ -221,6 +221,11 @@ class SelectionListCell: UITableViewCell {
 
         imageViewFrame.origin.x = imageViewOriginX + CGFloat(indentationLevel) * indentationWidth
         imageView?.frame = imageViewFrame
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        updateSelectionAppearance()
     }
 
     override var isSelected: Bool {
