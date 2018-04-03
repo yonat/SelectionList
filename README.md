@@ -1,5 +1,5 @@
 # SelectionList
-Simple single-selection or multiple-selection view, based on UITableView.
+Simple single-selection or multiple-selection checklist, based on UITableView.
 
 [![Swift Version][swift-image]][swift-url]
 [![Build Status][travis-image]][travis-url]

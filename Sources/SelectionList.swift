@@ -7,8 +7,11 @@
 
 import UIKit
 
-/// Simple single-selection or multiple-selection view, based on UITableView
+/// Simple single-selection or multiple-selection checklist, based on UITableView
 @IBDesignable open class SelectionList: UIControl {
+
+    // MARK: - Public
+
     public var tableView = UITableView()
 
     /// if `nil`, uses the standard checkmark accessory
@@ -93,6 +96,8 @@ import UIKit
         }
     }
 
+    // MARK: - Overrides
+
     override open var intrinsicContentSize: CGSize {
         return CGSize(width: UIViewNoIntrinsicMetric, height: tableView.contentSize.height)
     }
@@ -112,7 +117,9 @@ import UIKit
         selectedIndex = 2
     }
 
-    private let reuseIdentifier = String(describing: SelectionListCell.self)
+    // MARK: - Private
+
+    let reuseIdentifier = String(describing: SelectionListCell.self)
 }
 
 extension SelectionList {
@@ -139,6 +146,8 @@ extension SelectionList {
         }
     }
 }
+
+// MARK: - UITableView DataSource & Delegate
 
 extension SelectionList: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -168,6 +177,8 @@ extension SelectionList: UITableViewDataSource, UITableViewDelegate {
         sendActions(for: .valueChanged)
     }
 }
+
+// MARK: - Selection Marks
 
 class SelectionListCell: UITableViewCell {
     var selectionImage: UIImage?
@@ -238,6 +249,8 @@ class SelectionListCell: UITableViewCell {
         updateSelectionAppearance()
     }
 }
+
+// MARK: - Handy Extensions
 
 extension UIImage {
     static func emptyImage(size: CGSize) -> UIImage? {
