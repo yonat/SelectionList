@@ -96,11 +96,12 @@
 			buildConfigurationList = DCFD34C5206A463A000EA166 /* Build configuration list for PBXNativeTarget "SelectionListDemo" */;
 			buildPhases = (
 				7CD9D6EA80741AF8E08D4762 /* [CP] Check Pods Manifest.lock */,
+				DC9DD87020B0AC8C007E16DD /* ShellScript */,
 				DCFD34AF206A463A000EA166 /* Sources */,
 				DCFD34B0206A463A000EA166 /* Frameworks */,
 				DCFD34B1206A463A000EA166 /* Resources */,
 				548F7F74B062535210E1F079 /* [CP] Embed Pods Frameworks */,
-				1509EE29D7CD46DD79E6DADA /* [CP] Copy Pods Resources */,
+				DC9DD87120B0ACA6007E16DD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -159,21 +160,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1509EE29D7CD46DD79E6DADA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SelectionListDemo/Pods-SelectionListDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		548F7F74B062535210E1F079 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -209,6 +195,32 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		DC9DD87020B0AC8C007E16DD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftformat >/dev/null; then\nswiftformat --stripunusedargs unnamed-only \"${SRCROOT}/../Sources\"\nswiftformat --stripunusedargs unnamed-only \"${SRCROOT}\"\nfi";
+		};
+		DC9DD87120B0ACA6007E16DD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint lint --config \"${SRCROOT}/../Sources/.swiftlint.yml\"\ncd \"${SRCROOT}/../Sources\"\nswiftlint\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 

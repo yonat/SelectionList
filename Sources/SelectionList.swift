@@ -79,12 +79,12 @@ import UIKit
         set {
             deselectAll()
             let indexPathsToSelect = newValue.map { IndexPath(row: $0, section: 0) }
-            self.tableView.selectRows(at: indexPathsToSelect, animated: true)
+            tableView.selectRows(at: indexPathsToSelect, animated: true)
             updateMarks()
         }
     }
 
-    public private(set) var lastChangedIndex: Int? = nil
+    public private(set) var lastChangedIndex: Int?
 
     /// additional styling for the cell
     open var setupCell: ((UITableViewCell, Int) -> Void)? {
@@ -98,7 +98,7 @@ import UIKit
 
     // MARK: - Overrides
 
-    override open var intrinsicContentSize: CGSize {
+    open override var intrinsicContentSize: CGSize {
         return CGSize(width: UIViewNoIntrinsicMetric, height: tableView.contentSize.height)
     }
 
@@ -107,12 +107,13 @@ import UIKit
         setup()
     }
 
-    required public init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
     }
 
     open override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
         items = ["One", "Two", "Three"]
         selectedIndex = 2
     }
@@ -190,31 +191,25 @@ class SelectionListCell: UITableViewCell {
             if isSelectionMarkTrailing {
                 if isSelected {
                     accessoryView = UIImageView(image: selectionImage)
-                }
-                else {
+                } else {
                     if let deselectionImage = deselectionImage {
                         accessoryView = UIImageView(image: deselectionImage)
-                    }
-                    else {
+                    } else {
                         accessoryView = nil
                     }
                 }
-            }
-            else {
+            } else {
                 if isSelected {
                     imageView?.image = selectionImage
-                }
-                else {
+                } else {
                     if let deselectionImage = deselectionImage {
                         imageView?.image = deselectionImage
-                    }
-                    else {
+                    } else {
                         imageView?.image = UIImage.emptyImage(size: selectionImage.size)
                     }
                 }
             }
-        }
-        else {
+        } else {
             accessoryType = isSelected ? .checkmark : .none
         }
     }
@@ -222,7 +217,7 @@ class SelectionListCell: UITableViewCell {
     private var imageViewOriginX = CGFloat(0)
 
     override func layoutSubviews() {
-        super.layoutSubviews();
+        super.layoutSubviews()
         guard var imageViewFrame = imageView?.frame else { return }
 
         // re-entrance guard
@@ -246,6 +241,7 @@ class SelectionListCell: UITableViewCell {
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         updateSelectionAppearance()
     }
 }
@@ -273,6 +269,4 @@ extension UITableView {
             deselectRow(at: indexPath, animated: animated)
         }
     }
-
 }
-
