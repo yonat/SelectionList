@@ -125,6 +125,7 @@ import UIKit
 
 extension SelectionList {
     func setup() {
+        tableView.isAccessibilityElement = false
         tableView.register(SelectionListCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
@@ -157,6 +158,7 @@ extension SelectionList: UITableViewDataSource, UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        cell.isAccessibilityElement = true
         cell.selectionStyle = .none
         if let cell = cell as? SelectionListCell {
             cell.selectionImage = selectionImage
@@ -243,6 +245,19 @@ class SelectionListCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         updateSelectionAppearance()
+    }
+
+    override var accessibilityTraits: UIAccessibilityTraits {
+        get {
+            if isSelected {
+                return super.accessibilityTraits | UIAccessibilityTraitSelected
+            }
+            return super.accessibilityTraits
+        }
+
+        set {
+            super.accessibilityTraits = newValue
+        }
     }
 }
 
