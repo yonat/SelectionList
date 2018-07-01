@@ -70,7 +70,7 @@ Copy `Sources/SelectionList.swift` to your Xcode project.
 
 [https://github.com/yonat/SelectionList](https://github.com/yonat/SelectionList)
 
-[swift-image]:https://img.shields.io/badge/swift-3.0-orange.svg
+[swift-image]:https://img.shields.io/badge/swift-4.1-orange.svg
 [swift-url]: https://swift.org/
 [license-image]: https://img.shields.io/badge/License-MIT-blue.svg
 [license-url]: LICENSE.txt
