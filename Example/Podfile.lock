@@ -1,5 +1,5 @@
 PODS:
-  - SelectionList (1.1.1)
+  - SelectionList (1.2.0)
 
 DEPENDENCIES:
   - SelectionList (from `..`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: ".."
 
 SPEC CHECKSUMS:
-  SelectionList: 3618512cbb4da20005435b51fdeeab15cefbc968
+  SelectionList: 9df872c6a5f43db805dacfaa1e07cc235f7cff68
 
-PODFILE CHECKSUM: 7c0260f352b4f083c2efcaa3effe15b0cf527604
+PODFILE CHECKSUM: f282c9e32a1a11bfc35e9c5caba0280473153ae9
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

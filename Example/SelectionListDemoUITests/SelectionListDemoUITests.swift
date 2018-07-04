@@ -15,7 +15,7 @@ class SelectionListDemoUITests: XCTestCase {
         XCUIApplication().launch()
     }
 
-    func testSeletion() {
+    func testSelection() {
         let app = XCUIApplication()
         let selectionList = app.tables.firstMatch
 

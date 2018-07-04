@@ -172,12 +172,12 @@ extension SelectionList: UITableViewDataSource, UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         lastChangedIndex = indexPath.row
-        sendActions(for: .valueChanged)
+        sendActions(for: [.valueChanged, .primaryActionTriggered])
     }
 
     public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         lastChangedIndex = indexPath.row
-        sendActions(for: .valueChanged)
+        sendActions(for: [.valueChanged, .primaryActionTriggered])
     }
 }
 

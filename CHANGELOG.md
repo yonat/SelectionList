@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2018-07-04
+
+### Added
+- send `primaryActionTriggered` event as well as `valueChanged`.
+
 ## [1.1.1] - 2018-05-21
 
 ### Changed
