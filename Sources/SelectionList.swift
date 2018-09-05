@@ -9,7 +9,6 @@ import UIKit
 
 /// Simple single-selection or multiple-selection checklist, based on UITableView
 @IBDesignable open class SelectionList: UIControl {
-
     // MARK: - Public
 
     public var tableView = UITableView()
@@ -99,7 +98,7 @@ import UIKit
     // MARK: - Overrides
 
     open override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIViewNoIntrinsicMetric, height: tableView.contentSize.height)
+        return CGSize(width: UIView.noIntrinsicMetric, height: tableView.contentSize.height)
     }
 
     public override init(frame: CGRect) {
@@ -250,7 +249,7 @@ class SelectionListCell: UITableViewCell {
     override var accessibilityTraits: UIAccessibilityTraits {
         get {
             if isSelected {
-                return super.accessibilityTraits | UIAccessibilityTraitSelected
+                return super.accessibilityTraits.union(.selected)
             }
             return super.accessibilityTraits
         }

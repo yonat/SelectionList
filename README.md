@@ -60,6 +60,13 @@ selectionList.setupCell =  { (cell: UITableViewCell, index: Int) in
 pod 'SelectionList'
 ```
 
+Legacy versions:
+
+| Swift version | SelectionList version |
+| :---: | :---: |
+| 4.1 | 1.2.0 |
+| 4.0 | 1.0.2|
+
 ### Manually:
 
 Copy `Sources/SelectionList.swift` to your Xcode project.
@@ -70,7 +77,7 @@ Copy `Sources/SelectionList.swift` to your Xcode project.
 
 [https://github.com/yonat/SelectionList](https://github.com/yonat/SelectionList)
 
-[swift-image]:https://img.shields.io/badge/swift-4.1-orange.svg
+[swift-image]:https://img.shields.io/badge/swift-4.2-orange.svg
 [swift-url]: https://swift.org/
 [license-image]: https://img.shields.io/badge/License-MIT-blue.svg
 [license-url]: LICENSE.txt

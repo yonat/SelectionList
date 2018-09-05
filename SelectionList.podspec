@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "SelectionList"
-  s.version      = "1.2.0"
+  s.version      = "1.3.0"
   s.summary      = "Simple single-selection or multiple-selection checklist, based on UITableView."
 
   s.homepage     = "https://github.com/yonat/SelectionList"
@@ -13,6 +13,7 @@ Pod::Spec.new do |s|
   s.author             = { "Yonat Sharon" => "yonat@ootips.org" }
   s.social_media_url   = "http://twitter.com/yonatsharon"
 
+  s.swift_version = '4.2'
   s.platform     = :ios, "9.0"
   s.requires_arc = true
 
