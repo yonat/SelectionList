@@ -1,16 +1,37 @@
 PODS:
-  - SelectionList (1.2.0)
+  - SelectionList (1.3.0)
+  - SwiftFormat/CLI (0.40.8)
+  - SwiftLint (0.31.0)
+  - SwiftQuality (1.0.0):
+    - SwiftFormat/CLI (= 0.40.8)
+    - SwiftLint (= 0.31.0)
 
 DEPENDENCIES:
   - SelectionList (from `..`)
+  - SwiftQuality (from `https://github.com/yonat/SwiftQuality`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SwiftFormat
+    - SwiftLint
 
 EXTERNAL SOURCES:
   SelectionList:
     :path: ".."
+  SwiftQuality:
+    :git: https://github.com/yonat/SwiftQuality
+
+CHECKOUT OPTIONS:
+  SwiftQuality:
+    :commit: 24a5bde541616f55ab250ed4a93a1d3397d44b9d
+    :git: https://github.com/yonat/SwiftQuality
 
 SPEC CHECKSUMS:
-  SelectionList: 9df872c6a5f43db805dacfaa1e07cc235f7cff68
+  SelectionList: 4f4c720baf48f3d19c28d0622a43cbef237bb984
+  SwiftFormat: d9e5ca1aed735164fe9d26510ec508ddb8a93598
+  SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
+  SwiftQuality: 7e8e9783387fc64d0ad6f8a315507c9c0013dee8
 
-PODFILE CHECKSUM: f282c9e32a1a11bfc35e9c5caba0280473153ae9
+PODFILE CHECKSUM: e074681f1ffc7af1bcbb9825451d596bd9a74ac3
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1

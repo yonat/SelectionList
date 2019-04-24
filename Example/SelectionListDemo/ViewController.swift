@@ -24,7 +24,5 @@ class ViewController: UIViewController {
 
     @objc func selectionChanged() {
         print(selectionList.selectedIndexes)
-//        selectionList.items.append("\(selectionList.selectedIndexes)")
-//        selectionList.selectedIndexes = [0, 2, 4]
     }
 }
