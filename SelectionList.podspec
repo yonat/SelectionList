@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE.txt" }
 
   s.author             = { "Yonat Sharon" => "yonat@ootips.org" }
-  s.social_media_url   = "http://twitter.com/yonatsharon"
+  s.social_media_url   = "https://twitter.com/yonatsharon"
 
   s.swift_versions = ['4.2', '5.0']
   s.swift_version = '4.2'
@@ -20,5 +20,7 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/yonat/SelectionList.git", :tag => s.version }
   s.source_files  = "Sources/*.swift"
+
+  s.pod_target_xcconfig = { 'LD_RUNPATH_SEARCH_PATHS' => '$(FRAMEWORK_SEARCH_PATHS)' } # fix Interface Builder render error
 
 end
