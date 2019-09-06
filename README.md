@@ -67,9 +67,13 @@ Legacy versions:
 | 4.1 (Xcode 9.4) | `pod 'SelectionList', '~> 1.2.0'` |
 | 4.0 | `pod 'SelectionList', '~> 1.0.2'` |
 
-### Manually:
+### Swift Package Manager:
 
-Copy `Sources/SelectionList.swift` to your Xcode project.
+```swift
+dependencies: [
+    .package(url: "https://github.com/yonat/SelectionList", from: "1.3.2")
+]
+```
 
 ## Meta
 

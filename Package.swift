@@ -5,14 +5,14 @@ import PackageDescription
 let package = Package(
     name: "SelectionList",
     platforms: [
-        .iOS(.v9)
+        .iOS(.v9),
     ],
     products: [
-        .library( name: "SelectionList", targets: ["SelectionList"])
+        .library(name: "SelectionList", targets: ["SelectionList"]),
     ],
     dependencies: [],
     targets: [
-        .target(name: "SelectionList", dependencies: [], path: "Sources")
+        .target(name: "SelectionList", dependencies: [], path: "Sources"),
     ],
     swiftLanguageVersions: [.v5]
 )
