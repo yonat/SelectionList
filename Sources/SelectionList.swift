@@ -39,6 +39,7 @@ import UIKit
         }
         set {
             tableView.allowsMultipleSelection = newValue
+            tableView.allowsMultipleSelectionDuringEditing = newValue
         }
     }
 
@@ -177,6 +178,14 @@ extension SelectionList: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         lastChangedIndex = indexPath.row
         sendActions(for: [.valueChanged, .primaryActionTriggered])
+    }
+
+    public func tableView(_ tableView: UITableView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    public func tableView(_ tableView: UITableView, didBeginMultipleSelectionInteractionAt indexPath: IndexPath) {
+        tableView.isEditing = false
     }
 }
 
