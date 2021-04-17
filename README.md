@@ -47,6 +47,12 @@ selectionList.setupCell =  { (cell: UITableViewCell, index: Int) in
 }
 ```
 
+If you want to remove the cells seperators
+
+```swift
+selectionList.tableView.separatorStyle = .none
+```
+
 ## Requirements
 
 - iOS 9.0+
