@@ -98,11 +98,11 @@ import UIKit
 
     // MARK: - Overrides
 
-    open override var intrinsicContentSize: CGSize {
+    override open var intrinsicContentSize: CGSize {
         return CGSize(width: UIView.noIntrinsicMetric, height: tableView.contentSize.height)
     }
 
-    public override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
@@ -112,7 +112,7 @@ import UIKit
         setup()
     }
 
-    open override func prepareForInterfaceBuilder() {
+    override open func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         items = ["One", "Two", "Three"]
         selectedIndex = 2
@@ -194,7 +194,7 @@ extension SelectionList: UITableViewDataSource, UITableViewDelegate {
 class SelectionListCell: UITableViewCell {
     var selectionImage: UIImage?
     var deselectionImage: UIImage?
-    var isSelectionMarkTrailing: Bool = true
+    var isSelectionMarkTrailing = true
 
     func updateSelectionAppearance() {
         if let selectionImage = selectionImage {
