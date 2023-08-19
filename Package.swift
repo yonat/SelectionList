@@ -12,7 +12,7 @@ let package = Package(
     ],
     dependencies: [],
     targets: [
-        .target(name: "SelectionList", dependencies: [], path: "Sources"),
+        .target(name: "SelectionList", dependencies: [], path: "Sources", resources: [.copy("PrivacyInfo.xcprivacy")]),
     ],
     swiftLanguageVersions: [.v5]
 )
