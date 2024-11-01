@@ -77,7 +77,7 @@ Legacy versions:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/yonat/SelectionList", from: "1.4.4")
+    .package(url: "https://github.com/yonat/SelectionList", from: "1.4.5")
 ]
 ```
 
