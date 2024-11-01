@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.6
 
 import PackageDescription
 
@@ -12,7 +12,7 @@ let package = Package(
     ],
     dependencies: [],
     targets: [
-        .target(name: "SelectionList", dependencies: [], path: "Sources", resources: [.copy("PrivacyInfo.xcprivacy")]),
+        .target(name: "SelectionList", dependencies: [], path: "Sources", resources: [.process("PrivacyInfo.xcprivacy")]),
     ],
     swiftLanguageVersions: [.v5]
 )

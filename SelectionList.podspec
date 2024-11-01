@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/yonat/SelectionList.git", :tag => s.version }
   s.source_files  = "Sources/*.swift"
-  s.resource_bundles = {s.name => ['PrivacyInfo.xcprivacy']}
+  s.resource_bundles = {s.name => ['Sources/PrivacyInfo.xcprivacy']}
 
   s.pod_target_xcconfig = { 'LD_RUNPATH_SEARCH_PATHS' => '$(FRAMEWORK_SEARCH_PATHS)' } # fix Interface Builder render error
 
